@@ -53,7 +53,7 @@
   },
   {
     "year": 1996,
-    "duration": 4,
+    "next": 2000,
     "againstAllPresented": true,
     "tours": [
       {
@@ -154,7 +154,7 @@
   },
   {
     "year": 2000,
-    "duration": 4,
+    "next": 2004,
     "againstAllPresented": true,
     "tours": [
       {
@@ -236,7 +236,7 @@
   },
   {
     "year": 2004,
-    "duration": 4,
+    "next": 2008,
     "againstAllPresented": true,
     "tours": [
       {
@@ -246,7 +246,7 @@
             "name": "Vladimir Putin",
             "votes": 71.3,
             "party": "Independent",
-            "age": 51 
+            "age": 51
           },
           {
             "name": "Nikolay Kharitonov",
@@ -288,7 +288,7 @@
   },
   {
     "year": 2008,
-    "duration": 4,
+    "next": 2012,
     "againstAllPresented": false,
     "tours": [
       {
@@ -324,7 +324,7 @@
   },
   {
     "year": 2012,
-    "duration": 6,
+    "next": 2018,
     "againstAllPresented": false,
     "tours": [
       {
@@ -334,7 +334,7 @@
             "name": "Vladimir Putin",
             "votes": 63.6,
             "party": "United Russia",
-            "age":  59
+            "age": 59
           },
           {
             "name": "Gennady Zyuganov",
@@ -366,7 +366,7 @@
   },
   {
     "year": 2018,
-    "duration": 6,
+    "next": 2024,
     "againstAllPresented": false,
     "tours": [
       {
@@ -382,7 +382,7 @@
             "name": "Pavel Grudinin",
             "votes": 11.80,
             "party": "Communist Party",
-            "age":  57
+            "age": 57
           },
           {
             "name": "Vladimir Zhirinovsky",
@@ -412,13 +412,13 @@
             "name": "Maxim Suraykinv",
             "votes": 0.68,
             "party": "Communists of Russia",
-            "age":  39
+            "age": 39
           },
           {
             "name": "Sergey Baburin",
             "votes": 0.65,
             "party": "Russian All-People's Union",
-            "age":  59
+            "age": 59
           }
         ]
       }
