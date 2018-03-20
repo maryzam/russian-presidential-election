@@ -22,12 +22,10 @@
     d3.json("data/data.json", function(error, data) {
         if (error) throw error;
 
-        var years = [];
         var resultData = [];
         var candidates = [];
 
         data.forEach((d) => {
-            years.push(d.year);
             var xOffset = d.tours.length > 1 ? -maxRadius * 0.6 : 0;
 
             d.tours.forEach((t, i) => {
@@ -53,14 +51,16 @@
                         position: position
                     });
 
-                    if (candidates.indexOf(c.name) < 0) {
-                        candidates.push({ name: c.name })
+                    if (c.votes > 2 && candidates.indexOf(c.name) < 0) {
+                        candidates.push(c.name);
                     }
                 });
             })
         });
 
-        years.push(2024);
+        var scaleCandidates = d3
+            .scaleSequential(d3.interpolateCool)
+            .domain([0, candidates.length]);
 
         container
             .append("g").attr("class", "result-chart")
@@ -70,11 +70,57 @@
             .attr("cx", function (d) { return d.position.x; })
             .attr("cy", function(d) { return d.position.y; })
             .attr("r", function (d) { return d.radius; })
-            .style("fill-opacity", 0.3);
+            .style("fill", function(d) { return getColor(d.info.name); });
 
-        container
-            .append("g").attr("class", "year-axis")
-            .call(d3.axisBottom(scaleYear)
-                .tickValues(years)
-                .tickFormat(function (d) { return d; }));
+        // build year axis
+        var years = data.map((d) => d.year);
+
+        var periods = data.map((d) => {
+            var lastTour = d.tours.length - 1;
+            // assume that we've already had sorted data here
+            var president = d.tours[lastTour].nominee[0].name; 
+            return {
+                start: d.year,
+                end: d.next,
+                president: president
+            };
+        });
+
+        periods.unshift({
+            start: periods[0].start - 1,
+            end: periods[0].start
+        });
+
+        var lastYear = periods[(periods.length - 1)].end;
+        years.push(lastYear);
+
+        periods.push({
+            start: lastYear,
+            end: lastYear + 1
+        })
+
+        var timeline = container
+            .append("g").attr("class", "year-axis");
+
+        timeline
+            .selectAll("rect")
+            .data(periods).enter()
+            .append("rect")
+            .attr("x", function (d) { return scaleYear(d.start); })
+            .attr("width", function(d) {
+                return scaleYear(d.end) - scaleYear(d.start);
+            })
+            .attr("y", 0)
+            .attr("height", 10)
+            .style("fill", function(d) {
+                return getColor(d.president);
+            });
+
+        function getColor(name) {
+            var id = candidates.indexOf(name);
+            if (id === -1) {
+                return "grey";
+            }
+            return scaleCandidates(id);
+        }
     })
