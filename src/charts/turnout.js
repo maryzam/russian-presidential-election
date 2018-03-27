@@ -69,8 +69,7 @@ function buildChart(container, data, scaleYears, scaleTurnout) {
     	.append("path")
     		.attr("class", "area")
     		.attr("d", area)
-    		.style("fill", gradient)
-    		.style("fill-opacity", 0.7);
+    		.style("fill", gradient);
 };
 
 function buildTimeline(container, data, scaleYears) {
@@ -80,13 +79,15 @@ function buildTimeline(container, data, scaleYears) {
 					.attr("transform", `translate(${(2 * margin)},${(margin)})`);
 
 	const years = data.map(x => x.year).slice(1, (data.length - 1));
-	const timeline = chart.append("g").attr("class", "timeline");
+
+	const timeline = chart
+						.append("g")
+						.attr("class", "timeline");
 
 	timeline
 		.append("line")
 		.attr("y1", scaleYears.range()[0])
-		.attr("y2", scaleYears.range()[1])
-		.style("stroke", "grey");
+		.attr("y2", scaleYears.range()[1]);
 
 	const ticks = timeline
 		.selectAll("g")
@@ -96,17 +97,12 @@ function buildTimeline(container, data, scaleYears) {
 
 	ticks
 		.append("circle")
-		.attr("r", 5)
-		.style("fill" , "black")	
-		.style("stroke" , "white");	
+		.attr("r", 5);	
 
 	ticks
 		.append("text")
-		.attr("x", 10)
-		.attr("y", 10)
-		.text(function (d) { return d; })
-		.style("font-family", "monospace")
-		.style("font-size", "20px");
+		.attr("transform", "rotate(-90)translate(0, -10)")
+		.text(function (d) { return d; });
 };
 
 

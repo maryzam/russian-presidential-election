@@ -1,0 +1,28 @@
+
+text {
+	font-family: monospace;
+	font-size: 20px;
+	fill: black;
+}
+
+/* turnout chart styles */
+.turnout path.area {
+	fill: #999;
+	fill-opacity: 0.7;
+}
+
+.timeline circle {
+	fill: black;
+	stroke: white;
+}
+
+.timeline line {
+	stroke: grey;
+}
+
+.timeline text {
+	font-weight: bold;
+	text-anchor: middle;
+	fill: white;
+}
+
